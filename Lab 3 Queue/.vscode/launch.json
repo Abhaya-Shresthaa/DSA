@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/abhayas/Documents/sem 4/dsa/lab/Lab 3 Queue",
+      "program": "/Users/abhayas/Documents/sem 4/dsa/lab/Lab 3 Queue/build/Debug/outDebug"
+    }
+  ]
+}
