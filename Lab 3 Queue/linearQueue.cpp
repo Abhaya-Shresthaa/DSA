@@ -1,5 +1,5 @@
 #include <iostream>
-#define MAX 100
+#define MAX 5
 using namespace std;
 template <class T>
 class Queue{
@@ -67,12 +67,35 @@ class Queue{
 };
 int main(){
     Queue<std::string> tasks;
-    tasks.dequeue();
-    tasks.enqueue("Add a task");
-    tasks.enqueue("Update OS");
-    tasks.enqueue("Refresh monitor");
-    tasks.dequeue();
-    tasks.display();
-    tasks.dequeue();
+    int userInput;
+    string enqueueString;
+    while (true)
+    {
+        cout << "Enter 1 for enqueue: "<< endl;
+        cout << "Enter 2 for dequeue: "<< endl;
+        cout << "Enter 3 for display: "<< endl;
+        cout << "Enter 4 for exit: " << endl;
+        cin >> userInput;
+
+        switch(userInput){
+            case 1:
+                cout << "Enter a string to enqueue: ";
+                cin >> enqueueString;
+                tasks.enqueue(enqueueString);
+                break;
+            case 2:
+                tasks.dequeue();
+                break;
+            case 3:
+                tasks.display();
+                break;
+            case 4:
+                return 0;
+            default:
+                cout<< "Invalid Choice: ";
+
+        }
+    }
+    
     return 0;
 }

@@ -19,7 +19,6 @@ public:
         return ((front == 0 && rear == SIZE - 1) || (front == rear + 1));
     }
 
-    // Check if deque is empty
     bool isEmpty() {
         return (front == -1);
     }
@@ -114,19 +113,78 @@ public:
 int main() {
     Deque dq;
 
-    dq.addFront(10);
-    dq.addFront(20);
-    dq.display();
+    int userInput;
+    int enqueueInt;
+    int choosing;
+    while (true)
+    {
+        cout << "Enter 1 for enqueue: "<< endl;
+        cout << "Enter 2 for dequeue: "<< endl;
+        cout << "Enter 3 for display: "<< endl;
+        cout << "Enter 4 for exit: " << endl;
+        cin >> userInput;
 
-    dq.addRear(30);
-    dq.addRear(40);
-    dq.display();
+        switch(userInput){
+            case 1:
+                cout<< "Enter 1 for add front: "<< endl;
+                cout<< "Enter 2 for add rear: "<< endl;
+                cin >> choosing;
+                cout << "Enter a integer to enqueue: ";
+                cin >> enqueueInt;
+                switch (choosing)
+                {
+                    case 1:
+                        dq.addFront(enqueueInt);
+                        break;
+                    case 2:
+                        dq.addRear(enqueueInt);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 2:
+                cout<< "Enter 1 for delete front: "<< endl;
+                cout<< "Enter 2 for delete rear: "<< endl;
+                cin >> choosing;
+                switch (choosing)
+                {
+                    case 1:
+                        dq.deleteFront();
+                        break;
+                    case 2:
+                        dq.deleteRear();
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 3:
+                dq.display();
+                break;
+            case 4:
+                return 0;
+            default:
+                cout<< "Invalid Choice: ";
 
-    dq.deleteFront();
-    dq.display();
+        }
+    }
+    
 
-    dq.deleteRear();
-    dq.display();
+
+    // dq.addFront(10);
+    // dq.addFront(20);
+    // dq.display();
+
+    // dq.addRear(30);
+    // dq.addRear(40);
+    // dq.display();
+
+    // dq.deleteFront();
+    // dq.display();
+
+    // dq.deleteRear();
+    // dq.display();
 
     return 0;
 }
