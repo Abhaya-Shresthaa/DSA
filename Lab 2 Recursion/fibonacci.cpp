@@ -16,7 +16,7 @@ int fibonacci (int n)
 int main()
 {
     int n;
-    cout<<"Emter: ";
+    cout<<"Enter: ";
     cin>>n;
     cout<<"Fibonnaci term "<<n<<" is "<<fibonacci(n)<<".";
     return 0;
