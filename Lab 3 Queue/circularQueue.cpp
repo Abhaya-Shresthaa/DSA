@@ -38,7 +38,7 @@ class CircularQueue{
                 throw underflow_error("Queue Underflow: Circular queue is empty.");
             }
             T item = queue[front];
-            cout << "Item dequeued: " << queue[rear] << endl;
+            cout << "Item dequeued: " << queue[front] << endl;
             if(front == rear){ // Queue becomes empty after removing the last element
                 front = rear = -1;
             } else {
@@ -53,13 +53,18 @@ class CircularQueue{
                 return;
             }
             cout << "Circular Queue elements: ";
-            int i = front;
-            while(true){
-                cout << queue[i] << " ";
-                if(i == rear) break;
-                i = (i + 1) % MAX;
+            // int i = front;
+            // while(true){
+            //     cout << queue[i] << " ";
+            //     if(i == rear) break;
+            //     i = (i + 1) % MAX;
+            // }
+            // cout << endl;
+            for (int i = 0;i<MAX;i++){
+                if (queue[i]){
+                    cout << queue[i]<< " ";
+                }
             }
-            cout << endl;
         }
 };
 
