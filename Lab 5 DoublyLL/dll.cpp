@@ -82,6 +82,7 @@ class List{
             }
             newNode -> prev = temp -> prev;
             newNode -> next = temp;
+            (temp->prev) -> next =newNode;
             temp -> prev = newNode;
         }
 
@@ -177,10 +178,35 @@ class List{
             delete beforeNode;
             }
         }
+
+        void display(){
+        Node* temp = head;
+        while(temp != NULL){
+            cout << temp->data << " <=> " ;
+            temp = temp ->next;
+        }
+        cout << "NULL" << endl;
+    }
 };
 
 int main(){
 
-
+    List ll;
+    ll.pushFront(10);
+    ll.pushFront(20);
+    ll.pushFront(30);
+    ll.pushBack(40);
+    ll.pushBack(50);
+    ll.insertAfterSp(60, 10);
+    ll.insertBeforeSp(70, 10);
+    ll.display();
+    ll.popEnd();
+    ll.display();
+    ll.popFront();
+    ll.display();
+    ll.deleteAfterSp(10);
+    ll.display();
+    ll.deleteBeforeSp(10);
+    ll.display();
     return 0;
 }
