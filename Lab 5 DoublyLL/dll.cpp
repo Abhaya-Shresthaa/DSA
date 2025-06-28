@@ -47,6 +47,44 @@ class List{
             }
         }
 
+        void insertAfterSp(int val, int spData){
+            Node* newNode = new Node(val);
+            if(head == NULL){
+                cout << "List is empty specific val not found" << endl;
+                return;
+            }
+            Node* temp = head;
+            while(temp ->data != spData ){
+                temp = temp -> next;
+                if(temp == NULL){
+                    cout << "Data Not Found" << endl;
+                    return;
+                }
+            }
+            newNode -> next = temp -> next;
+            newNode -> prev = temp;
+            temp -> next = newNode;
+        }
+
+        void insertBeforeSp(int val, int spData){
+            Node* newNode = new Node(val);
+            if(head == NULL){
+                cout << "List is empty specific val not found" << endl;
+                return;
+            }
+            Node* temp = head;
+            while(temp ->data != spData ){
+                temp = temp -> next;
+                if(temp == NULL){
+                    cout << "Data Not Found" << endl;
+                    return;
+                }
+            }
+            newNode -> prev = temp -> prev;
+            newNode -> next = temp;
+            temp -> prev = newNode;
+        }
+
         void popFront(){
             if(head == NULL){
                 cout << "List is empty" << endl;
@@ -79,6 +117,64 @@ class List{
                 prev -> next = NULL;
                 temp -> prev = NULL;
                 delete temp;
+            }
+        }
+
+        void deleteAfterSp(int spData){
+            if(head == NULL){
+                cout << "List is empty" << endl;
+                return;
+            }
+            else{
+                Node* temp = head;
+                Node* afterNode = temp;
+                while(temp ->data != spData ){
+                    temp = temp -> next;
+                    if(temp == NULL){
+                        cout << "Data Not Found" << endl;
+                        return;
+                    }
+            }
+            if(temp -> next == NULL){
+                cout << "It is last node: "<< endl;
+                return;
+            }
+            afterNode = temp -> next;
+            temp -> next = afterNode -> next;
+            if(afterNode->next != NULL){
+                (afterNode -> next)->prev = temp;
+            }
+            afterNode -> next = afterNode -> prev = NULL;
+            delete afterNode;
+            }
+        }
+
+        void deleteBeforeSp(int spData){
+            if(head == NULL){
+                cout << "List is empty" << endl;
+                return;
+            }
+            else{
+                Node* temp = head;
+                Node* beforeNode = temp;
+                while(temp ->data != spData ){
+                    temp = temp -> next;
+                    if(temp == NULL){
+                        cout << "Data Not Found" << endl;
+                        return;
+                    }
+            }
+            if(temp -> prev == NULL){
+                cout << "It is first node: "<< endl;
+                return;
+            }
+            beforeNode = temp -> prev;
+            temp -> prev = beforeNode -> prev;
+            if(beforeNode->prev != NULL){
+                (beforeNode -> prev)->next = temp;
+            }
+            beforeNode -> next = beforeNode -> prev = NULL;
+            delete beforeNode;
             }
         }
 };
