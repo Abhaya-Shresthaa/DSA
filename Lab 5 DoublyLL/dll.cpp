@@ -42,6 +42,43 @@ class List{
                 while(temp -> next != NULL){
                     temp = temp -> next;
                 }
+                temp -> next = newNode;
+                newNode -> prev = temp;
+            }
+        }
+
+        void popFront(){
+            if(head == NULL){
+                cout << "List is empty" << endl;
+                return;
+            }
+            else{
+                Node* temp = head;
+                head = head -> next;
+                if(head != NULL){
+                    head -> prev = NULL;
+                }
+                temp -> next = NULL;
+                delete temp;
+                
+            }
+        }
+
+        void popEnd(){
+            if(head == NULL){
+                cout << "List is empty" << endl;
+                return;
+            }
+            else{
+                Node* temp = head;
+                Node* prev = temp;
+                while(temp->next != NULL){
+                    temp = temp -> next;
+                }
+                prev = temp -> prev;
+                prev -> next = NULL;
+                temp -> prev = NULL;
+                delete temp;
             }
         }
 };
