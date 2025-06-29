@@ -63,7 +63,8 @@ int main(){
     sll.push(30);
     sll.display();
     sll.pop();
-
+    sll.display();
+    sll.push(40);
     sll.display();
 
     return 0;
