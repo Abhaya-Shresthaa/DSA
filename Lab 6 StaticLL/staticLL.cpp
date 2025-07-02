@@ -9,6 +9,16 @@ struct nodeType{
 static int avail = 0;
 static int list = -1;
 
+// int getNode(){
+//     int index;
+//     if(avail == -1){
+//         cout << "array is full" << endl;
+//         exit(1);
+//     }
+//     index = avail;
+//     avail = node[avail].next;
+//     return index;
+// }
 
 void insertAtBeg(int val){
     int index = avail;
@@ -78,7 +88,7 @@ void deleteBegg(){
         cout << "list is already empty";
         exit(1);
     }
-
+    
     int index = list;
     list = node[list].next;
     avail = index;
