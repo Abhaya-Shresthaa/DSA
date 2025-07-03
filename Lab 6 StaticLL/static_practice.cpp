@@ -71,7 +71,7 @@ void insertEnd(int val){
     }
 }
 
-void insetAtSpecific(int val, int specificVal){
+void insertAfterSpecific(int val, int specificVal){
     int index = getNode();
     if(index == -1) exit(1);
 
@@ -113,7 +113,7 @@ void deletEnd(){
     if(node[list].next == -1){
         freeNodes(list);
         list = -1;
-        cout << "list is empty now";
+        cout << "list is empty now" << endl;
         initializeNodes();
         return;
     }
@@ -124,9 +124,29 @@ void deletEnd(){
     int lastNode = node[temp].next;
     node[temp].next = -1;
     freeNodes(lastNode);
-
-
 }
+
+void deleteAfterSpecific(int specificVal){
+    if(list == -1){
+        cout << "underFlow"<<endl;
+        exit(1);
+    }
+    int temp = list;
+    while (temp != -1 && node[temp].data != specificVal){
+        temp = node[temp].next;
+    }
+    if(temp == -1){
+        cout << "Specific value is not found" << endl;
+        return;
+    }
+    else if(node[temp].next == -1){
+        cout << "Cannot delete after this value" <<endl;
+        return;
+    }
+    int toDelete = node[temp].next;
+    node[temp].next = node[toDelete].next;
+    freeNodes(toDelete);
+}   
 
 void display(){
         int temp = list;
@@ -145,9 +165,21 @@ int main(){
     insertEnd(30);
     insertEnd(40);
     insertEnd(50);
-    insetAtSpecific(60,40);
+    insertAfterSpecific(60,40);
     display();
     deleteBeg();
+    deletEnd();
+    display();
+    insertBeg(70);
+    insertAfterSpecific(80, 40);
+    display();
+    deleteAfterSpecific(100);
+    deleteAfterSpecific(80);
+    deleteAfterSpecific(80);
+    deletEnd();
+    deletEnd();
+    deletEnd();
+    deletEnd();
     deletEnd();
     display();
     return 0;
