@@ -1,186 +1,137 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-#define MAX 10
-struct Node{
+struct nodeType{
     int data;
-    int next;
-}node[MAX];
+    int next = -2;
+}node[5];
 
-int list = -1;
-int avail = 0;
+static int avail = 0;
+static int list = -1;
 
-//sabai nodes lo next ma incremental value
-void initializeNodes(){
-    for( int i = 0; i < MAX; i++){
-        node[i].next = i+1;
-    }
-    node[MAX-1].next = -1;
-    list = -1;
-    avail = 0;
-}
+// int getNode(){
+//     int index;
+//     if(avail == -1){
+//         cout << "array is full" << endl;
+//         exit(1);
+//     }
+//     index = avail;
+//     avail = node[avail].next;
+//     return index;
+// }
 
-//create or link a node from here
-int getNode(){
-    if(avail == -1){
-        cout << "Overflow";
-        return -1;
-    }
+void insertAtBeg(int val){
     int index = avail;
-    avail = node[avail].next;
-    return index;
+    if(avail == -1){
+        cout << "list is full" << endl;
+        exit(1);
+    }
+    if(list == -1){
+        node[index].data = val;
+        avail = avail+1;
+        node[index].next = -1;
+        list = index;
+        return;
+    }
+    node[index].data = val;
+    if(node[avail].next != -2){
+        avail = node[index].next;
+    }
+    else{
+        if(avail == 4){
+            avail = -1;
+        }
+        else{
+            avail = avail+1;
+        }
+    }
+    node[index].next = list;
+    list = index;
 }
 
-// deleting a node (node ko next ma avail halera avail lai index ma point garni)
-void freeNodes(int index){
-    node[index].next =avail;
+void insertAtEnd(int val){
+    int index = avail;
+    if(avail == -1){
+        cout << "list is full" << endl;
+        exit(1);
+    }
+    if(list == -1){
+        node[index].data = val;
+        avail = avail+1;
+        node[index].next = -1;
+        list = index;
+        return;
+    }
+    node[index].data = val;
+    int num = list;
+    while(node[num].next != -1){
+        num = node[num].next;
+    }
+    node[num].next = index;
+
+    if(node[avail].next != -2){
+        avail = node[index].next;
+    }
+    else{
+        if(avail == 4){
+            avail = -1;
+        }
+        else{
+            avail = avail+1;
+        }
+    }
+    node[index].next = -1;
+}
+
+void deleteBegg(){
+    if(list == -1){
+        cout << "list is already empty";
+        exit(1);
+    }
+    
+    int index = list;
+    list = node[list].next;
     avail = index;
 }
 
-void insertBeg(int val){
-    int index = getNode();
-    if (index == -1) exit(1); //exit if full;
-    node[index].data = val;
+// void deleteEnd(){
+//     if(list == -1){
+//         cout << "list is already empty";
+//         exit(1);
+//     }
 
-    //checks if empty
-    if( list == -1){
-        list = index;
-        node[index].next = -1;
-    }
-    else{
-        node[index].next = list;
-        list = index;
-    }
-}
+//     int index = list;
+//     list = node[list].next;
+//     avail = index;
 
-void insertEnd(int val){
-    int index = getNode();
-    if (index == -1) exit(1);
-    node[index].data = val;
-    node[index].next = -1;
-    if( list == -1){
-        list = index;
-    }
-    else{
-        int temp = list;
-        while(node[temp].next != -1){
-            temp = node[temp].next;
-        }
-        node[temp].next = index;
-        
-    }
-}
+//     int num = list;
+//     while(node[num].next != -1){
+//         num = node[num].next;
+//     }
+//     node[num].next = index;
 
-void insertAfterSpecific(int val, int specificVal){
-    int index = getNode();
-    if(index == -1) exit(1);
-
-    int temp = list;
-    while(temp != -1 && node[temp].data != specificVal){
-        temp = node[temp].next;
-    }
-    if(temp == -1){
-        cout << "Specific val not found"<< endl;
-        exit(1);
-    }
-    node[index].data = val;
-    node[index].next = node[temp].next;
-    node[temp].next = index;
-}
-
-void deleteBeg(){
-    if(list == -1){
-        cout << "underFlow"<<endl;
-        exit(1);
-    }
-    if(node[list].next == -1){
-        freeNodes(list);
-        list = -1;
-        cout << "list is empty now";
-        initializeNodes();
-        return;
-    }
-    int temp = list;
-    list = node[list].next;
-    freeNodes(temp);
-}
-
-void deletEnd(){
-    if(list == -1){
-        cout << "underFlow"<<endl;
-        exit(1);
-    }
-    if(node[list].next == -1){
-        freeNodes(list);
-        list = -1;
-        cout << "list is empty now" << endl;
-        initializeNodes();
-        return;
-    }
-    int temp = list;
-    while (node[node[temp].next].next != -1){
-        temp = node[temp].next;
-    }
-    int lastNode = node[temp].next;
-    node[temp].next = -1;
-    freeNodes(lastNode);
-}
-
-void deleteAfterSpecific(int specificVal){
-    if(list == -1){
-        cout << "underFlow"<<endl;
-        exit(1);
-    }
-    int temp = list;
-    while (temp != -1 && node[temp].data != specificVal){
-        temp = node[temp].next;
-    }
-    if(temp == -1){
-        cout << "Specific value is not found" << endl;
-        return;
-    }
-    else if(node[temp].next == -1){
-        cout << "Cannot delete after this value" <<endl;
-        return;
-    }
-    int toDelete = node[temp].next;
-    node[temp].next = node[toDelete].next;
-    freeNodes(toDelete);
-}   
+// }
 
 void display(){
-        int temp = list;
-        while(temp != -1){
-            cout << node[temp].data << " => " ;
-            temp = node[temp].next;
-        }
-        cout << "NULL" << endl;
+    int num = list;
+    while(num != -1){
+        cout << node[num].data<<endl;
+        num = node[num].next;
+    }
 }
 
-
 int main(){
-    initializeNodes();
-    insertBeg(10);
-    insertBeg(20);
-    insertEnd(30);
-    insertEnd(40);
-    insertEnd(50);
-    insertAfterSpecific(60,40);
+    insertAtBeg(10);
+    insertAtBeg(20); 
+    insertAtEnd(30); 
+    insertAtEnd(40); 
+    insertAtEnd(50); 
     display();
-    deleteBeg();
-    deletEnd();
+    cout<< endl;
+    deleteBegg();
     display();
-    insertBeg(70);
-    insertAfterSpecific(80, 40);
-    display();
-    deleteAfterSpecific(100);
-    deleteAfterSpecific(80);
-    deleteAfterSpecific(80);
-    deletEnd();
-    deletEnd();
-    deletEnd();
-    deletEnd();
-    deletEnd();
-    display();
+    //cout << node[list].data << endl << node[node[list].next].data <<endl;
+    //cout << node[list].next << endl << node[node[list].next].next<< endl;
+    //cout << list << endl;
     return 0;
 }
