@@ -94,6 +94,24 @@ void deleteBegg(){
     avail = index;
 }
 
+// void deleteEnd(){
+//     if(list == -1){
+//         cout << "list is already empty";
+//         exit(1);
+//     }
+
+//     int index = list;
+//     list = node[list].next;
+//     avail = index;
+
+//     int num = list;
+//     while(node[num].next != -1){
+//         num = node[num].next;
+//     }
+//     node[num].next = index;
+
+// }
+
 void display(){
     int num = list;
     while(num != -1){
@@ -108,7 +126,9 @@ int main(){
     insertAtEnd(30); 
     insertAtEnd(40); 
     insertAtEnd(50); 
-
+    display();
+    cout<< endl;
+    deleteBegg();
     display();
     //cout << node[list].data << endl << node[node[list].next].data <<endl;
     //cout << node[list].next << endl << node[node[list].next].next<< endl;
