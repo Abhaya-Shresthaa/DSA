@@ -10,7 +10,7 @@ struct Node{
 int list = -1;
 int avail = 0;
 
-//sabai nodes lai next ma incremental value
+//sabai nodes lo next ma incremental value
 void initializeNodes(){
     for( int i = 0; i < MAX; i++){
         node[i].next = i+1;
