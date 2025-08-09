@@ -160,27 +160,23 @@ void display(){
 
 int main(){
     initializeNodes();
-    insertBeg(10);
-    insertBeg(20);
-    insertEnd(30);
-    insertEnd(40);
-    insertEnd(50);
-    insertAfterSpecific(60,40);
-    display();
-    deleteBeg();
-    deletEnd();
-    display();
-    insertBeg(70);
-    insertAfterSpecific(80, 40);
-    display();
-    deleteAfterSpecific(100);
-    deleteAfterSpecific(80);
-    deleteAfterSpecific(80);
-    deletEnd();
-    deletEnd();
-    deletEnd();
-    deletEnd();
-    deletEnd();
-    display();
+    insertBeg(5);
+    insertEnd(15);
+    insertBeg(3);
+    insertEnd(20);
+    insertAfterSpecific(10, 15); // insert 10 after 15
+    display(); // Expected: 3 => 5 => 15 => 10 => 20 => NULL
+
+    deleteBeg(); // deletes 3
+    deletEnd();  // deletes 20
+    display(); // Expected: 5 => 15 => 10 => NULL
+
+    insertAfterSpecific(25, 10); // insert 25 after 10
+    insertBeg(1); // insert 1 at beginning
+    display(); // Expected: 1 => 5 => 15 => 10 => 25 => NULL
+
+    deleteAfterSpecific(15); // deletes 10
+    display(); // Expected: 1 => 5 => 15 => 25 => NULL
+
     return 0;
 }
